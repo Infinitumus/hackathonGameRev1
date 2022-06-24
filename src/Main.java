@@ -18,14 +18,14 @@ public class Main {
             y = controller.inputCoord("y");
             controller.movePlayer(x, y, player1);
             view.showField();
-            if (controller.getWinnerPlayer(player1)){
+            if (controller.getWinnerPlayer(player1) || controller.endGame()){
                 break;
             }
             x = controller.inputCoord("x");
             y = controller.inputCoord("y");
             controller.movePlayer(x, y, player2);
             view.showField();
-            if (controller.getWinnerPlayer(player2)){
+            if (controller.getWinnerPlayer(player2) || controller.endGame()){
                 break;
             }
         }

@@ -93,15 +93,12 @@ public class ControllerGame {
     private boolean checkDiagonal1(Player player) {
         int count = 0;
         for (int i = 0; i < field.getSIZE(); i++) {
-            for (int j = i; j <= i; j++) {
-                if (field.getCellState(i, j) == player.getFIGURE()) {
-                    count++;
-                    break;
-                }
+            if (field.getCellState(i, i) == player.getFIGURE()) {
+                count++;
             }
-            if (count == field.getSIZE()) {
-                return true;
-            }
+        }
+        if (count == field.getSIZE()) {
+            return true;
         }
         return false;
     }
@@ -109,26 +106,20 @@ public class ControllerGame {
     //проверка по диагонали2
     private boolean checkDiagonal2(Player player) {
         int count = 0;
-        for (int i = field.getSIZE()-1; i >= 0; i--) {
-            for (int j = field.getSIZE()-1-i; j >= field.getSIZE()-1-i; j--) {
-                if (field.getCellState(i, j) == player.getFIGURE()) {
-                    count++;
-                    break;
-                }
+        for (int i = field.getSIZE() - 1; i >= 0; i--) {
+            if (field.getCellState(i, field.getSIZE() - 1 - i) == player.getFIGURE()) {
+                count++;
             }
-            if (count == field.getSIZE()) {
-                return true;
-            }
+        }
+        if (count == field.getSIZE()) {
+            return true;
         }
         return false;
     }
 
     public boolean getWinnerPlayer(Player player) {
-        if (checkHorizontal(player) || checkVertical(player) || checkDiagonal1(player)
-                || checkDiagonal2(player)) {
-            return true;
-        }
-        return false;
+        return checkHorizontal(player) || checkVertical(player) || checkDiagonal1(player)
+                || checkDiagonal2(player);
     }
 
     public String getWinnerName() {
