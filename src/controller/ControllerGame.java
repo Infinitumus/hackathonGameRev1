@@ -19,7 +19,7 @@ public class ControllerGame {
     }
 
     public int inputCoord(String coord) {
-        System.out.printf("Введите координату %s", coord);
+        System.out.printf("Введите координату %s:   ", coord);
         return scanner.nextInt();
     }
 

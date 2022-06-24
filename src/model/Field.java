@@ -3,7 +3,7 @@ package model;
 public class Field {
     private final int SIZE;
     private String[][] stateField;
-    private final String DEFAULT_SYMBOL = "x";
+    private final String DEFAULT_SYMBOL = " ";
     private final int MIN_NUMBER;
     private final int MAX_NUMBER;
 
