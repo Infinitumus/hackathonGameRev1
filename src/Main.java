@@ -13,9 +13,22 @@ public class Main {
         view.showField();
 
         int x, y;
-        x = controller.inputCoord("x");
-        y = controller.inputCoord("y");
-        controller.movePlayer(x, y, player1);
-        view.showField();
+        while (!controller.endGame()){
+            x = controller.inputCoord("x");
+            y = controller.inputCoord("y");
+            controller.movePlayer(x, y, player1);
+            view.showField();
+            if (controller.getWinnerPlayer(player1)){
+                break;
+            }
+            x = controller.inputCoord("x");
+            y = controller.inputCoord("y");
+            controller.movePlayer(x, y, player2);
+            view.showField();
+            if (controller.getWinnerPlayer(player2)){
+                break;
+            }
+        }
+        System.out.printf("\nПобедил - %s", controller.getWinnerName());
     }
 }

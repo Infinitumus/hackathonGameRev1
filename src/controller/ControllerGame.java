@@ -54,9 +54,10 @@ public class ControllerGame {
         return true;
     }
 
-    private boolean getWinnerPlayer(Player player) {
+    //проверка по горизонтали
+    private boolean checkHorizontal(Player player) {
         int count;
-        //проверка по горизонтали
+
         for (int i = 0; i < field.getSIZE(); i++) {
             count = 0;
             for (int j = 0; j < field.getSIZE(); j++) {
@@ -68,7 +69,12 @@ public class ControllerGame {
                 }
             }
         }
-        //проверка по вертикали
+        return false;
+    }
+
+    //проверка по вертикали
+    private boolean checkVertical(Player player) {
+        int count;
         for (int j = 0; j < field.getSIZE(); j++) {
             count = 0;
             for (int i = 0; i < field.getSIZE(); i++) {
@@ -80,30 +86,48 @@ public class ControllerGame {
                 }
             }
         }
-        count = 0;
-        //проверка по диагонали1
+        return false;
+    }
+
+    //проверка по диагонали1
+    private boolean checkDiagonal1(Player player) {
+        int count;
         for (int i = 0; i < field.getSIZE(); i++) {
+            count = 0;
             for (int j = 0; j < field.getSIZE(); j++) {
                 if (field.getCellState(i, j) == player.getFIGURE()) {
                     count++;
                     break;
                 }
             }
+            if (count == field.getSIZE()) {
+                return true;
+            }
         }
-        if (count == field.getSIZE()) {
-            return true;
-        }
-        count = 0;
-        //проверка по диагонали2
-        for (int i = field.getSIZE(); i > 0; i--) {
-            for (int j = field.getSIZE(); j > 0; j--) {
+        return false;
+    }
+
+    //проверка по диагонали2
+    private boolean checkDiagonal2(Player player) {
+        int count;
+        for (int i = field.getSIZE()-1; i > 0; i--) {
+            count = 0;
+            for (int j = field.getSIZE()-1; j > 0; j--) {
                 if (field.getCellState(i, j) == player.getFIGURE()) {
                     count++;
                     break;
                 }
             }
+            if (count == field.getSIZE()) {
+                return true;
+            }
         }
-        if (count == field.getSIZE()) {
+        return false;
+    }
+
+    public boolean getWinnerPlayer(Player player) {
+        if (checkHorizontal(player) || checkVertical(player) || checkDiagonal1(player)
+                || checkDiagonal2(player)) {
             return true;
         }
         return false;
@@ -114,7 +138,8 @@ public class ControllerGame {
             return player1.getNAME();
         } else if (getWinnerPlayer(player2)) {
             return player2.getNAME();
-        } else return "Ничья";
+        }
+        return "Ничья";
     }
 
 }
