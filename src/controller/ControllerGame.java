@@ -91,10 +91,9 @@ public class ControllerGame {
 
     //проверка по диагонали1
     private boolean checkDiagonal1(Player player) {
-        int count;
+        int count = 0;
         for (int i = 0; i < field.getSIZE(); i++) {
-            count = 0;
-            for (int j = 0; j < field.getSIZE(); j++) {
+            for (int j = i; j <= i; j++) {
                 if (field.getCellState(i, j) == player.getFIGURE()) {
                     count++;
                     break;
@@ -109,10 +108,9 @@ public class ControllerGame {
 
     //проверка по диагонали2
     private boolean checkDiagonal2(Player player) {
-        int count;
-        for (int i = field.getSIZE()-1; i > 0; i--) {
-            count = 0;
-            for (int j = field.getSIZE()-1; j > 0; j--) {
+        int count = 0;
+        for (int i = field.getSIZE()-1; i >= 0; i--) {
+            for (int j = field.getSIZE()-1-i; j >= field.getSIZE()-1-i; j--) {
                 if (field.getCellState(i, j) == player.getFIGURE()) {
                     count++;
                     break;
